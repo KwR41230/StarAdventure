@@ -108,7 +108,17 @@ character3 = Explorers("Kamari", "Crystal Mining")
 character4 = Explorers("Arik", "Doonium Mining")
 
 characters = [character1, character2, character3, character4]
-
+print(
+    '''
+ #####                            #                                                           
+#     # #####   ##   #####       # #   #####  #    # ###### #    # ##### #    # #####  ###### 
+#         #    #  #  #    #     #   #  #    # #    # #      ##   #   #   #    # #    # #      
+ #####    #   #    # #    #    #     # #    # #    # #####  # #  #   #   #    # #    # #####  
+      #   #   ###### #####     ####### #    # #    # #      #  # #   #   #    # #####  #      
+#     #   #   #    # #   #     #     # #    #  #  #  #      #   ##   #   #    # #   #  #      
+ #####    #   #    # #    #    #     # #####    ##   ###### #    #   #    ####  #    # ###### 
+ '''
+)
 print("Welcome to Star Adventures!")
 print("Choose a character:")
 for index, character in enumerate(characters):
