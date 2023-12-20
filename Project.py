@@ -1,4 +1,5 @@
 import random
+import sys
 
 character_list = ("Aesira", "Evrin", "Kamari", "Arik")
 
@@ -41,6 +42,21 @@ class Explorers:
             doonium=self.doonium)
 
     def select_activity(self):
+        asteroid_chance = random.randint(1, 5)
+        # if the random number is 1, the character is hit by an asteroid and ends the game
+        if asteroid_chance == 1:
+            print(
+                f"\n OH NOO! An asteroid has hit {self.name} when they were trying to mine resources!! {self.name} has died!!")
+            print('''
+              ____    _    __  __ _____    _____     _______ ____  
+             / ___|  / \  |  \/  | ____|  / _ \ \   / / ____|  _ \ 
+            | |  _  / _ \ | |\/| |  _|   | | | \ \ / /|  _| | |_) |
+            | |_| |/ ___ \| |  | | |___  | |_| |\ V / | |___|  _ < 
+             \____/_/   \_\_|  |_|_____|  \___/  \_/  |_____|_| \_\                                            
+            '''
+                  )
+            sys.exit()
+
         actions = ["Mine Fuel Cells", "Fishing", "Mine Doonium Ore", "Mine Crystals"]
         print(""
               "")
@@ -72,7 +88,7 @@ class Explorers:
             try:
                 travel_worlds = int(input())
                 chosen_planet = world_list[travel_worlds - 1]
-                print(chosen_planet.name + " is a great destination! ")
+                print('\n' + chosen_planet.name + " is a great destination! ")
                 print(str(chosen_planet))
                 print("\n")
             except (IndexError, ValueError):
@@ -82,7 +98,9 @@ class Explorers:
             if not cont.lower() in ['yes', 'y']:
                 break
             else:
-                chosen_planet = None # reset to None so user can choose again
+                chosen_planet = None  # reset to None so user can choose again
+
+        selected_character.select_activity()
 
     def mine_crystals(self):
         mined_crystals = random.randint(0, 20)  # Random amount of crystals mined
@@ -100,7 +118,7 @@ class Explorers:
         self.fish_inventory.append(mined_fish)
         print(""
               "")
-        print(f"******{self.name} mined {mined_fish} fish!******")
+        print(f"******{self.name} caught {mined_fish} fish!******")
         print(""
               "")
 
@@ -142,9 +160,8 @@ print(
  #####    #   #    # #    #    #     # #####    ##   ###### #    #   #    ####  #    # ###### 
  '''
 )
-print("Welcome to Star Adventures!")
-print(""
-      "")
+print("Welcome to Star Adventures! \n")
+print("Can you obtain all 4 resources without getting hit by an asteroid??  Lets Play! \n")
 print("Choose a character:")
 for index, character in enumerate(characters):
     print(f"{index + 1}. {character.name}")
@@ -155,9 +172,7 @@ choice = int(input("Enter the number of the character you want to choose: ")) - 
 
 if choice in range(len(characters)):
     selected_character = characters[choice]
-    print(""
-          "")
-    print(f"You have selected {selected_character}")
+    print(f"\n You have selected {selected_character}")
 
     selected_character.travel()
 
@@ -173,9 +188,8 @@ if choice in range(len(characters)):
             pass
         elif cont.lower() == 'no' or cont.lower() == 'n':
             while True:
-                print("\nWhat would you like to do?")
-                print(""
-                      "")
+                print("\n What would you like to do? \n")
+
                 print("1. Quit Game")
                 print("2. Travel to a Different Planet")
                 print("3. Select Another Activity")
@@ -184,11 +198,22 @@ if choice in range(len(characters)):
                 if next_action == "1":
                     print(""
                           "")
-                    print(f"{selected_character.name} ended the game with the following inventory:")
-                    print(""
-                          "")
+                    print(f"{selected_character.name} ended the game with the following inventory: \n ")
+
                     print(
                         f"******Fish: {selected_character.fish}, Fuel cells: {selected_character.fuel_cells}, Crystals: {selected_character.crystals}, Doonium Ore: {selected_character.doonium}******")
+                    if selected_character.fish > 0 and selected_character.fuel_cells > 0 and selected_character.crystals > 0 and selected_character.doonium > 0:
+                        print(f"\n Congratulations {selected_character.name}!, You are THE Star Adventurer!! \n")
+                        print('''
+                    ____    ____  ______    __    __     ____    __    ____  __  .__   __.  __  
+                    \   \  /   / /  __  \  |  |  |  |    \   \  /  \  /   / |  | |  \ |  | |  | 
+                     \   \/   / |  |  |  | |  |  |  |     \   \/    \/   /  |  | |   \|  | |  | 
+                      \_    _/  |  |  |  | |  |  |  |      \            /   |  | |  . `  | |  | 
+                        |  |    |  `--'  | |  `--'  |       \    /\    /    |  | |  |\   | |__| 
+                        |__|     \______/   \______/         \__/  \__/     |__| |__| \__| (__) 
+                                                                            
+                                           
+                        ''')
                     game_is_running = False  # stop the game
                     break
                 elif next_action == "2":
